@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/domain/service/firebase_service.dart';
+import 'package:flutter_firebase/ui/screens/drawer_widget.dart';
 
 class UserInfoScreen extends StatefulWidget {
   const UserInfoScreen({
@@ -24,41 +25,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
         title: const Text('Drawer Demo'),
         automaticallyImplyLeading: false,
       ),
-      drawer: Drawer(
-        child: new ListView(
-          children: <Widget>[
-            new DrawerHeader(
-              margin: EdgeInsets.zero,
-              padding: EdgeInsets.zero,
-              child: UserAccountsDrawerHeader (
-                decoration: BoxDecoration(color: Colors.orange),
-                accountName: Text('User name: ${widget.user.displayName}'),
-                accountEmail:  Text('User email: ${widget.user.email}'),
-                currentAccountPicture: CircleAvatar(
-                  backgroundImage: AssetImage('img/1.png'),
-                ),
-                onDetailsPressed: (){
-                  setState(() {
-                  showUserDetails = !showUserDetails;
-                });},
-              ),
-            ),
-            Expanded(child: Container(
-              child: showUserDetails ?
-                  TextButton(onPressed: (){}, child: Text('Change avatar'))
-                  : null,
-            )),
-             ListTile(
-                title: new Text("О себе"),
-                onTap: (){}
-            ),
-             ListTile(
-                title: new Text("Настройки"),
-                onTap: (){}
-            )
-          ],
-        ),
-      ),
+      drawer: DrawerWidget(user: widget.user,),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
