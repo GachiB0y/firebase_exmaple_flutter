@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase/ui/screens/image_widget.dart';
 class DrawerWidget extends StatefulWidget {
   final User user;
-  const DrawerWidget({Key? key, required this.user}) : super(key: key);
+  File? image;
+
+  DrawerWidget({Key? key, required this.user, required this.image}) : super(key: key);
 
   @override
   State<DrawerWidget> createState() => _DrawerWidgetState();
@@ -25,7 +30,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               accountName: Text('User name: ${widget.user.displayName}'),
               accountEmail:  Text('User email: ${widget.user.email}'),
               currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('img/1.png'),
+                  child:widget.image!= null ? Image.file(widget.image!) : FlutterLogo(size: 100,),
               ),
               onDetailsPressed: (){
                 setState(() {
