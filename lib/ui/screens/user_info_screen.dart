@@ -23,23 +23,6 @@ class UserInfoScreen extends StatefulWidget {
 
 class _UserInfoScreenState extends State<UserInfoScreen> {
   bool showUserDetails = false;
-  File? image;
-
-  Future pickImage(ImageSource source) async{
-    try{
-      final ImagePicker picker = ImagePicker();
-      final XFile? image = await picker.pickImage(source: source);
-      if (image == null) return;
-
-      final iamgeTemporary = File(image.path);
-
-      setState(() {
-        this.image = iamgeTemporary;
-      });
-    }on PlatformException catch(e){
-      print("Failed pick image: #e");
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +31,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
         title: const Text('Drawer Demo'),
         automaticallyImplyLeading: false,
       ),
-      drawer: DrawerWidget(user: widget.user,image: image,),
+      drawer: DrawerWidget(user: widget.user,),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -78,24 +61,11 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                 }
               },
             ),
-           image !=null ? AvatarWidget(image: image!,onClicked: (source) =>pickImage(source) ,) : const SizedBox.shrink(),
             TextButton(
               onPressed: () {
                 FirebaseService().logOut();
               },
               child: Text('Logout'),
-            ),
-            TextButton(
-              onPressed: () {
-                pickImage(ImageSource.camera);
-              },
-              child: Text('Pick Camera'),
-            ),
-            TextButton(
-              onPressed: () {
-                pickImage(ImageSource.gallery);
-              },
-              child: Text('Pick Gallery'),
             ),
           ],
         ),
