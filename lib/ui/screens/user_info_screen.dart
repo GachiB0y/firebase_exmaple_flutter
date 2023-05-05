@@ -4,8 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_firebase/domain/service/firebase_service.dart';
-import 'package:flutter_firebase/ui/screens/drawer_widget.dart';
-import 'package:flutter_firebase/ui/screens/image_widget.dart';
+import 'package:flutter_firebase/ui/widget/drawer_widget.dart';
+import 'package:flutter_firebase/ui/widget/image_widget.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UserInfoScreen extends StatefulWidget {
@@ -28,6 +28,14 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: ()  {
+                FirebaseService().logOut();
+              },
+              icon:const Icon(Icons.exit_to_app)
+          ),
+        ],
         title: const Text('Drawer Demo'),
         automaticallyImplyLeading: false,
       ),
@@ -36,37 +44,31 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            StreamBuilder<User?>(
-              stream: FirebaseService().auth.userChanges(),
-              builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
-                if (snapshot.data == null) {
-                  return Text('User not found');
-                }
-                final user = snapshot.data!;
-                user.reload();
-                if (user.emailVerified) {
-                  return Text('Email: is Verify: ${user.emailVerified}');
-                } else {
-                  return Column(
-                    children: [
-                      Text('Email: is Verify: ${user.emailVerified}'),
-                      TextButton(
-                        onPressed: () {
-                          FirebaseService().onVerifyEmail();
-                        },
-                        child: Text('Verify Email'),
-                      ),
-                    ],
-                  );
-                }
-              },
-            ),
-            TextButton(
-              onPressed: () {
-                FirebaseService().logOut();
-              },
-              child: Text('Logout'),
-            ),
+            // StreamBuilder<User?>(
+            //   stream: FirebaseService().auth.userChanges(),
+            //   builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
+            //     if (snapshot.data == null) {
+            //       return Text('User not found');
+            //     }
+            //     final user = snapshot.data!;
+            //     user.reload();
+            //     if (user.emailVerified) {
+            //       return Text('Email: is Verify: ${user.emailVerified}');
+            //     } else {
+            //       return Column(
+            //         children: [
+            //           Text('Email: is Verify: ${user.emailVerified}'),
+            //           TextButton(
+            //             onPressed: () {
+            //               FirebaseService().onVerifyEmail();
+            //             },
+            //             child: Text('Verify Email'),
+            //           ),
+            //         ],
+            //       );
+            //     }
+            //   },
+            // ),
           ],
         ),
       ),

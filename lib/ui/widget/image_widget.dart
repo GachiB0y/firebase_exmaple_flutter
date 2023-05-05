@@ -18,7 +18,7 @@ class AvatarWidget extends StatelessWidget {
           Positioned(
             bottom: 0,
               right: 4,
-              child: Icon(Icons.photo_camera_front_rounded)
+              child: Icon(Icons.photo_camera_front_rounded,color: Colors.white,)
           ),
         ],
       ),
