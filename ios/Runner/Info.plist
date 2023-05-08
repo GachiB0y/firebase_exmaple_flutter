@@ -53,5 +53,7 @@
     <string>Access to Microphone</string>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>Access to PhotoLibrary</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Доступ к геолокации пользователя необходим для отображения текущей геопозиции</string>
 </dict>
 </plist>

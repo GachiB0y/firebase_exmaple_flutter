@@ -1,11 +1,12 @@
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_firebase/domain/service/firebase_service.dart';
+import 'package:flutter_firebase/ui/screens/map_screen.dart';
 import 'package:flutter_firebase/ui/widget/image_widget.dart';
 import 'package:image_picker/image_picker.dart';
+
 class DrawerWidget extends StatefulWidget {
   final User user;
   File? image;
@@ -119,7 +120,9 @@ class _DrawerWidgetState extends State<DrawerWidget> {
           ),
           ListTile(
               title: new Text("Карта"),
-              onTap: (){}
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (_) => MapScreen()));
+              }
           ),
           ListTile(
               title: new Text("Настройки"),
