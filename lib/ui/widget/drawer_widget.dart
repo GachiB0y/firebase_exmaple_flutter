@@ -47,7 +47,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             child: UserAccountsDrawerHeader (
               decoration: BoxDecoration(color: Colors.orange),
               accountName: Text('User name: ${widget.user.displayName}'),
-              accountEmail:  Text('User email: ${widget.user.email}'),
+              accountEmail:  Text('Mail: ${widget.user.email}'),
               currentAccountPicture: widget.image !=null
                   ? AvatarWidget(image: widget.image!,onClicked: (source) =>pickImage(source) ,)
                   : CircleAvatar(
@@ -61,6 +61,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                       ],
                     ),
                   ),
+             otherAccountsPicturesSize: Size(50, 50),
              otherAccountsPictures: [
                StreamBuilder<User?>(
                  stream: FirebaseService().auth.userChanges(),
