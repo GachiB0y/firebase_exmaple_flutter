@@ -1,6 +1,8 @@
 # flutter_firebase
 
-A new Flutter project.
+![til](./assets/example_firebase.gif)
+
+Аутентификация Firebase через mail,yandex mapkit, работа с камерой смартфона image piker.
 
 ## Getting Started
 
